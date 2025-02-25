@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useSpring, animated } from "@react-spring/web";
 import UserForm from "../components/UserForm";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import TextEditor from "../components/RichTextEditor";
 
 const Home = () => {
     const count = useSelector((state: RootState) => state.counter.count);
@@ -39,13 +40,24 @@ const Home = () => {
             {/* Main Content */}
             <Stack
                 sx={{
-                    zIndex: 1, 
+                    zIndex: 1,
                     color: "#000",
-                    flexDirection: "row"
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    gap: "16px",
                 }}
             >
-                <Counter count={count} />
-                <UserForm />
+                <Box sx={{ flex: {xs: "1" ,md: "1 1 40%"}, minWidth: "300px" }}>
+                    <Counter count={count} />
+                </Box>
+                
+                <Box sx={{ flex: {xs: "1" ,md: "1 1 40%"}, minWidth: "300px" }}>
+                    <TextEditor />
+                </Box>
+
+                <Box sx={{ flex: "1 1 100%", minWidth: "300px" }}>
+                    <UserForm />
+                </Box>
             </Stack>
         </div>
     );
