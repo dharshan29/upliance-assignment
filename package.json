@@ -16,6 +16,7 @@
     "@mui/material": "^6.4.5",
     "@react-spring/web": "^9.7.5",
     "@reduxjs/toolkit": "^2.6.0",
+    "@tiptap/extension-underline": "^2.11.5",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "firebase": "^11.3.1",

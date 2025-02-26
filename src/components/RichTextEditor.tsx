@@ -1,24 +1,29 @@
-import { Box, Divider, IconButton, Stack } from '@mui/material';
+import {  Divider, IconButton, Stack } from '@mui/material';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
+
 import {
   FormatBold as BoldIcon,
   FormatItalic as ItalicIcon,
   StrikethroughS as StrikethroughIcon,
   FormatListNumbered as ListOrderedIcon,
   FormatListBulleted as ListUnorderedIcon,
+  FormatUnderlined as UnderlineIcon,
 } from '@mui/icons-material';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { setContent } from '../store/textEditorSlice';
 
+import './style.css'
+
 const TextEditor: React.FC = () => {
   const dispatch = useDispatch();
   const content = useSelector((state: RootState) => state.textEditor.content);
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline],
     editorProps: {
       attributes: {
         class: 'custom-editor',
@@ -38,7 +43,7 @@ const TextEditor: React.FC = () => {
         borderRadius: '8px',
         background: '#F1F1F15C',
         padding: '0px 8px 10px 8px',
-        minHeight: '130px',
+        minHeight: '300px',
         justifyContent: 'space-between',
         '&:hover': {
           border: '1px solid black',
@@ -66,6 +71,15 @@ const TextEditor: React.FC = () => {
         >
           <ItalicIcon />
         </IconButton>
+        <IconButton
+            onClick={(e) => {
+                e.preventDefault();
+                editor?.chain().focus().toggleUnderline().run();
+            }}
+        >
+            <UnderlineIcon />
+        </IconButton>
+
         <IconButton
           onClick={(e) => {
             e.preventDefault();

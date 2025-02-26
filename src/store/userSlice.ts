@@ -1,4 +1,4 @@
-// store/userSlice.ts
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
@@ -25,9 +25,12 @@ export const userSlice = createSlice({
         saveUserData: (state, action: PayloadAction<Omit<User, "id">>) => {
             state.userData = { ...action.payload, id: nanoid() };
         },
+        clearUserData: (state) => {
+            state.userData = null;
+        },
     },
 });
 
-export const { saveUserData } = userSlice.actions;
+export const { saveUserData, clearUserData } = userSlice.actions;
 
 export default userSlice.reducer;

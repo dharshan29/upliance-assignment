@@ -1,10 +1,10 @@
-// src/pages/Login.tsx
+
 import { Button, Card, CardContent, Typography, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../lib/firebaseConfig";
-// import backgroundImage from "../assets/background.jpg";
+
 
 const Login = () => {
   const navigate = useNavigate();

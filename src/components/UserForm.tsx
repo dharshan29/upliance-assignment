@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { saveUserData } from "../store/userSlice";
-import { RootState } from "../store/store";
+// import { RootState } from "../store/store";
 
 const UserForm = () => {
     const dispatch = useDispatch();
-    const userData = useSelector((state: RootState) => state.user.userData);
+    // const userData = useSelector((state: RootState) => state.user.userData);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -15,23 +15,19 @@ const UserForm = () => {
         phone: "",
     });
 
-    useEffect(() => {
-        if (userData) {
-            setFormData(userData);
-        }
-    }, [userData]);
 
     useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-            const isDataDifferent = JSON.stringify(userData) !== JSON.stringify(formData);
-            if (isDataDifferent) {
+            const hasUnsavedChanges = Object.values(formData).some(value => value.trim() !== "");
+            if (hasUnsavedChanges) {
                 e.preventDefault();
                 e.returnValue = "";
             }
         };
+
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    }, [formData, userData]);
+    }, [formData]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -41,7 +37,7 @@ const UserForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(saveUserData(formData));
-        alert("User data saved!");
+        setFormData({ name: "", address: "", email: "", phone: "" });
     };
 
     return (
@@ -49,6 +45,10 @@ const UserForm = () => {
             component="form"
             onSubmit={handleSubmit}
             sx={{
+                border: "1px solid #00000021",
+                borderRadius: "8px",
+                padding: "16px",
+                background: '#F1F1F15C',
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,

@@ -3,7 +3,6 @@ import { Button, Container, Typography, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { increment, decrement, reset } from "../store/counterSlice";
 
-// Define props type for Counter
 interface CounterProps {
     count: number;
   }
@@ -19,6 +18,11 @@ const Counter: React.FC<CounterProps> = ({ count }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        border: "1px solid #00000021",
+        borderRadius: "8px",
+        padding: "16px",
+        background: '#F1F1F15C',
+        height: {md: "300px"}
       }}
     >
       <Typography variant="h4" gutterBottom>
@@ -30,14 +34,7 @@ const Counter: React.FC<CounterProps> = ({ count }) => {
           color="success"
           onClick={() => dispatch(increment())}
         >
-          Increment
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
+            +
         </Button>
         <Button
           variant="contained"
@@ -45,6 +42,13 @@ const Counter: React.FC<CounterProps> = ({ count }) => {
           onClick={() => dispatch(reset())}
         >
           Reset
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => dispatch(decrement())}
+        >
+          -
         </Button>
       </Box>
     </Container>

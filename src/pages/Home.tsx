@@ -5,13 +5,14 @@ import { useSpring, animated } from "@react-spring/web";
 import UserForm from "../components/UserForm";
 import { Box, Stack } from "@mui/material";
 import TextEditor from "../components/RichTextEditor";
+import UserDetails from "../components/UserDetails";
 
 const Home = () => {
     const count = useSelector((state: RootState) => state.counter.count);
 
-    // Spring animation for vertical fill
+
     const styles = useSpring({
-        height: `${Math.min(count * 10, 100)}%`, // Cap at 100%
+        height: `${Math.min(count * 10, 100)}%`,
         config: { tension: 170, friction: 26 },
     });
 
@@ -38,27 +39,40 @@ const Home = () => {
             />
 
             {/* Main Content */}
-            <Stack
+            <Box
                 sx={{
-                    zIndex: 1,
-                    color: "#000",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    gap: "16px",
+                    height: "100%",
+                    overflowY: "scroll"
                 }}
             >
-                <Box sx={{ flex: {xs: "1" ,md: "1 1 40%"}, minWidth: "300px" }}>
-                    <Counter count={count} />
-                </Box>
-                
-                <Box sx={{ flex: {xs: "1" ,md: "1 1 40%"}, minWidth: "300px" }}>
-                    <TextEditor />
-                </Box>
+                <Stack
+                    sx={{
+                        zIndex: 1,
+                        color: "#000",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        gap: "16px",
+                        width: "90%",
+                        margin: "auto"
+                    }}
+                >
+                    <Stack sx={{ flex: {xs: "1" ,md: "1 1 40%"}, mx: {xs: 0, md: "20px"}, my: "20px", minWidth: "300px", justifyContent: "center" }}>
+                        <Counter count={count} />
+                    </Stack>
+                    
+                    <Box sx={{ flex: {xs: "1" ,md: "1 1 40%"}, mx: {xs: 0, md: "20px"}, my: "20px", minWidth: "300px" }}>
+                        <TextEditor />
+                    </Box>
 
-                <Box sx={{ flex: "1 1 100%", minWidth: "300px" }}>
-                    <UserForm />
-                </Box>
-            </Stack>
+                    <Box sx={{ flex: "1 1 40%", minWidth: "300px", mx: {xs: 0, md: "20px"}, my: "20px" }}>
+                        <UserForm />
+                    </Box>
+
+                    <Box sx={{ flex: "1 1 40%", minWidth: "300px", mx: {xs: 0, md: "20px"}, my: "20px" }}>
+                        <UserDetails />
+                    </Box>
+                </Stack>
+            </Box>
         </div>
     );
 };
