@@ -52,8 +52,6 @@ const UserForm = () => {
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,
-                width: "300px",
-                margin: "0 auto",
             }}
         >
             <Typography variant="h4" textAlign="center">
